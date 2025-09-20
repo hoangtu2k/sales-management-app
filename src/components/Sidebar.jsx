@@ -5,6 +5,7 @@ import { ChevronDown, ChevronRight, HouseDoor, People, Box, Cart, GraphUp, Gear,
 export default function Sidebar({ collapsed, toggleSidebar }) {
   const [ordersDropdownOpen, setOrdersDropdownOpen] = useState(false)
   const [reportsDropdownOpen, setReportsDropdownOpen] = useState(false)
+  const [productsDropdownOpen, setProductsDropdownOpen] = useState(false)
 
   const toggleOrdersDropdown = () => {
     setOrdersDropdownOpen(!ordersDropdownOpen)
@@ -12,6 +13,10 @@ export default function Sidebar({ collapsed, toggleSidebar }) {
 
   const toggleReportsDropdown = () => {
     setReportsDropdownOpen(!reportsDropdownOpen)
+  }
+
+  const toggleProductsDropdown = () => {
+    setProductsDropdownOpen(!productsDropdownOpen)
   }
 
   return (
@@ -24,6 +29,7 @@ export default function Sidebar({ collapsed, toggleSidebar }) {
       </div>
 
       <ul className="nav nav-pills flex-column mb-auto px-2">
+
         {/* Dashboard Menu Item */}
         <li className="nav-item">
           <NavLink
@@ -63,18 +69,47 @@ export default function Sidebar({ collapsed, toggleSidebar }) {
           </NavLink>
         </li>
 
-
         {/* Products Menu Item */}
         <li className="nav-item">
-          <NavLink
-            to="/admin/products"
-            className={({ isActive }) =>
-              `nav-link text-white ${isActive ? 'active' : ''}`
-            }
+          <div
+            className="nav-link text-white d-flex justify-content-between align-items-center cursor-pointer"
+            onClick={toggleProductsDropdown}
           >
-            <Box className="me-3" />
-            {!collapsed && <span>Products</span>}
-          </NavLink>
+            <div>
+              <Cart className="me-3" />
+              {!collapsed && <span>Sản phẩm</span>}
+            </div>
+            {!collapsed && (
+              productsDropdownOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />
+            )}
+          </div>
+
+          {!collapsed && productsDropdownOpen && (
+            <ul className="nav flex-column ps-5">
+              <li className="nav-item">
+                <NavLink
+                  to="/admin/products/list"
+                  className={({ isActive }) =>
+                    `nav-link text-white ${isActive ? 'active' : ''}`
+                  }
+                >
+                  <i className="bi bi-list-ul me-2"></i>
+                  Danh sách sản phẩm
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  to="/admin/products/create"
+                  className={({ isActive }) =>
+                    `nav-link text-white ${isActive ? 'active' : ''}`
+                  }
+                >
+                  <i className="bi bi-plus-circle me-2"></i>
+                  Nhập sản phẩm
+                </NavLink>
+              </li>
+            </ul>
+          )}
         </li>
 
         {/* Orders Dropdown Menu */}

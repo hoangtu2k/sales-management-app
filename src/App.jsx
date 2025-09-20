@@ -7,7 +7,9 @@ import AdminLayout from "@layouts/AdminLayout";
 
 import Login from "@pages/admin/Login";
 import Dashboard from "@pages/admin/Dashboard";
-import ProductManage from "@pages/admin/ProductManage";
+import ProductManage from "@pages/admin/products/ProductManage";
+import Orders from "@pages/admin/orders/Orders";
+import CreateOrder from "@pages/admin/orders/CreateOrder";
 
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
@@ -22,7 +24,9 @@ export default function App() {
           <Route element={<AdminLayout />}>
             <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/admin/products" element={<ProductManage />} />
+            <Route path="/admin/products/list" element={<ProductManage />} />
+            <Route path="/admin/orders/list" element={<Orders />} />
+            <Route path="/admin/orders/create" element={<CreateOrder />} />
           </Route>
 
           {/* Nhóm route admin yêu cầu đăng nhập */}
